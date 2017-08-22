@@ -30,7 +30,7 @@ def main(
     remote_path=config("remote_path"),
     remote_file_name=None,
     clipboard=True,
-    ):
+):
     if remote_file_name is None:
         remote_file_name = os.path.basename(source)
     dest_path = os.path.join(remote_path, remote_file_name)
@@ -47,5 +47,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     input_file = os.path.abspath(args.file)
     assert os.path.exists(input_file)
-    remote_path = main(input_file)
-    print(remote_path)
+    url = main(input_file)
+    print(url)
