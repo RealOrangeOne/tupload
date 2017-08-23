@@ -1,5 +1,5 @@
 import argparse
-from upload.common import upload
+from tupload.common import upload
 import os
 
 
