@@ -8,6 +8,6 @@ def cli():
     parser.add_argument("file")
     args = parser.parse_args()
     input_file = os.path.abspath(args.file)
-    assert os.path.exists(input_file)
+    assert os.path.isfile(input_file)
     url = upload(input_file)
     print(url)
