@@ -8,5 +8,6 @@ setup(
     entry_points="""
         [console_scripts]
         upload=upload.upload:cli
+        screenshot=upload.screenshot:cli
     """
 )
