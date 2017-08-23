@@ -4,6 +4,8 @@ import os
 import subprocess
 import tempfile
 import time
+import random
+from string import hexdigits
 
 
 def capture():
@@ -16,11 +18,12 @@ def capture():
 def get_remote_filename(config):
     preset = get_config('screenshot_preset', config).lower()
     presets = {
-        'timestamp': "sc-{}.png".format(int(time.time()))
+        'timestamp': int(time.time()),
+        'hex': ''.join(random.sample(hexdigits, 8)).lower()
     }
     if preset not in presets:
         raise KeyError("Invalid preset {}.".format(preset))
-    return presets[preset]
+    return str(presets[preset]) + '.png'
 
 
 def cli():
