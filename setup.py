@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name="upload",
@@ -7,6 +7,6 @@ setup(
     include_package_data=True,
     entry_points="""
         [console_scripts]
-        upload=upload:cli
+        upload=client.upload:cli
     """
 )
