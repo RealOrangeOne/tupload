@@ -17,7 +17,10 @@ def get_config(key, config):
         data = json.load(config_file)
     if config not in data:
         raise KeyError("Couldnt find configuration {}".format(config))
-    return data[config][key]
+    required_config = data[config]
+    if key not in required_config:
+        raise KeyError("{} is missing key {}.".format(config, key))
+    return required_config[key]
 
 
 def copy_to_clipboard(value):

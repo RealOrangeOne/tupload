@@ -1,5 +1,5 @@
 import argparse
-from tupload.common import upload
+from tupload.common import upload, get_config
 import os
 import subprocess
 import tempfile
@@ -13,6 +13,16 @@ def capture():
     return temp_file
 
 
+def get_remote_filename(config):
+    preset = get_config('screenshot_preset', config).lower()
+    presets = {
+        'timestamp': "sc-{}.png".format(int(time.time()))
+    }
+    if preset not in presets:
+        raise KeyError("Invalid preset {}.".format(preset))
+    return presets[preset]
+
+
 def cli():
     parser = argparse.ArgumentParser()
     parser.add_argument("--progress", action="store_true", help="Show Upload Progress")
@@ -22,7 +32,6 @@ def cli():
     if not os.path.exists(captured_file) or os.path.getsize(captured_file) == 0:
         print("Failed to capture image.")
         exit(1)
-    remote_file = "sc-{}.png".format(int(time.time()))
-    url = upload(captured_file, remote_file_name=remote_file, progress=args.progress, config=args.to)
+    url = upload(captured_file, remote_file_name=get_remote_filename(args.to), progress=args.progress, config=args.to)
     os.remove(captured_file)
     print(url)
