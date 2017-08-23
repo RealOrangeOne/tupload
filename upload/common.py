@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-
 import subprocess
 import os
 import json
-import argparse
 
 
 def config(key):
@@ -23,7 +20,7 @@ def upload_file(source, remote):
     assert upload_output.returncode == 0
 
 
-def main(
+def upload(
     source,
     viewable_root=config("viewable_root"),
     server=config("destination_server"),
@@ -41,11 +38,4 @@ def main(
     return remote_path
 
 
-def cli():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("file")
-    args = parser.parse_args()
-    input_file = os.path.abspath(args.file)
-    assert os.path.exists(input_file)
-    url = main(input_file)
-    print(url)
+
