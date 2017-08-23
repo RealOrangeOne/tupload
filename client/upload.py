@@ -41,7 +41,7 @@ def main(
     return remote_path
 
 
-if __name__ == '__main__':
+def cli():
     parser = argparse.ArgumentParser()
     parser.add_argument("file")
     args = parser.parse_args()
