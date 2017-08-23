@@ -15,8 +15,11 @@ def copy_to_clipboard(value):
     return value
 
 
-def upload_file(source, remote):
-    upload_output = subprocess.run(['rsync', source, remote], stdout=subprocess.PIPE)
+def upload_file(source, remote, progress):
+    args = ['rsync', source, remote]
+    if progress:
+        args.append('--progress')
+    upload_output = subprocess.run(args)
     assert upload_output.returncode == 0
 
 
@@ -27,12 +30,13 @@ def upload(
     remote_path=config("remote_path"),
     remote_file_name=None,
     clipboard=True,
+    progress=False
 ):
     if remote_file_name is None:
         remote_file_name = os.path.basename(source)
     dest_path = os.path.join(remote_path, remote_file_name)
     remote_path = os.path.join(viewable_root, remote_file_name)
-    upload_file(source, "{}:{}".format(server, dest_path))
+    upload_file(source, "{}:{}".format(server, dest_path), progress=progress)
     if clipboard:
         copy_to_clipboard(remote_path)
     return remote_path

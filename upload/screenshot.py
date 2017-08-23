@@ -15,12 +15,13 @@ def capture():
 
 def cli():
     parser = argparse.ArgumentParser()
-    parser.parse_args()
+    parser.add_argument("--progress", action="store_true", help="Show Upload Progress")
+    args = parser.parse_args()
     captured_file = capture()
     if not os.path.exists(captured_file) or os.path.getsize(captured_file) == 0:
         print("Failed to capture image.")
         exit(1)
     remote_file = "sc-{}.png".format(int(time.time()))
-    url = upload(captured_file, remote_file_name=remote_file)
+    url = upload(captured_file, remote_file_name=remote_file, progress=args.progress)
     os.remove(captured_file)
     print(url)
