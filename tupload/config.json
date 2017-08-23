@@ -1,5 +1,7 @@
 {
-  "destination_server": "example.com",
-  "viewable_root": "https://example.com/screenshots",
-  "remote_path": "/var/www/screenshots"
+  "default": {
+    "destination_server": "example.com",
+    "viewable_root": "https://example.com",
+    "remote_path": "/var/www/uploads"
+  }
 }
