@@ -2,9 +2,14 @@ import subprocess
 import os
 import json
 
+CONFIG_PATH = os.path.expanduser('~/.upload')
+
 
 def config(key):
-    with open(os.path.expanduser('~/.upload')) as config_file:
+    if not os.path.isfile(CONFIG_PATH):
+        raise FileNotFoundError("Couldn't find config file at {}.".format(CONFIG_PATH))
+
+    with open(CONFIG_PATH) as config_file:
         data = json.load(config_file)
     return data.get(key)
 
