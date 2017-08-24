@@ -8,9 +8,12 @@ import random
 from string import hexdigits
 
 
-def capture():
+def capture(capture_mode, include_pointer=False):
     temp_file = tempfile.mkstemp()[1]
-    img_output = subprocess.run(['gnome-screenshot', '-f', temp_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    args = ['gnome-screenshot', capture_mode, '-f', temp_file]
+    if include_pointer:
+        args.append('-p')
+    img_output = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     assert img_output.returncode == 0
     return temp_file
 
@@ -26,12 +29,27 @@ def get_remote_filename(config):
     return str(presets[preset]) + '.png'
 
 
+def get_capture_mode(args):
+    if args.window:
+        return '-w'
+    elif args.area:
+        return '-a'
+    return ''
+
+
 def cli():
     parser = argparse.ArgumentParser()
     parser.add_argument("--progress", action="store_true", help="Show Upload Progress")
     parser.add_argument("--to", help="Configuration to upload to", default='default')
+    parser.add_argument("-w", "--window", action="store_true")
+    parser.add_argument("-a", "--area", action="store_true")
+    parser.add_argument("-p", "--include-pointer", action="store_true")
     args = parser.parse_args()
-    captured_file = capture()
+    if args.window and args.area:
+        print("Can't use window and area")
+        exit(1)
+    capture_mode = get_capture_mode(args)
+    captured_file = capture(capture_mode, args.include_pointer)
     if not os.path.exists(captured_file) or os.path.getsize(captured_file) == 0:
         print("Failed to capture image.")
         exit(1)
