@@ -6,7 +6,7 @@ import json
 def expand_path(path):
     return os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
 
-CONFIG_PATH = expand_path("~/.upload")
+CONFIG_PATH = expand_path("/etc/.updated")
 
 
 def get_config(key, config):

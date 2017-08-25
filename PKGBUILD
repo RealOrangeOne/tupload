@@ -14,4 +14,5 @@ sha512sums=('SKIP')
 package() {
   cd tupload-master
   python setup.py install --root="$pkgdir/" --optimize=1
+  install -Dm644 tupload/config.json "$pkgdir"/etc/.upload
 }
