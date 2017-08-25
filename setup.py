@@ -1,9 +1,12 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="tupload",
     version="1.0.0",
     install_requires=[],
+    include_package_data=True,
+    zip_safe=False,
+    packages=find_packages(exclude=[]),
     entry_points="""
         [console_scripts]
         upload=tupload.upload:cli
