@@ -9,6 +9,7 @@ setup(
     packages=find_packages(exclude=[]),
     entry_points="""
         [console_scripts]
+        tupload=tupload.upload:cli
         upload=tupload.upload:cli
         screenshot=tupload.screenshot:cli
     """

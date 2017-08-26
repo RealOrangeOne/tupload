@@ -10,5 +10,6 @@ test:
     override:
         - flake8 client/ --ignore=E128,E501
         - flake8 setup.py --ignore=E128,E501
+        - tupload --help
         - upload --help
         - screenshot --help
