@@ -12,5 +12,6 @@ setup(
         tupload=tupload.upload:cli
         upload=tupload.upload:cli
         screenshot=tupload.screenshot:cli
+        redist=tupload.redistribute:cli
     """
 )
