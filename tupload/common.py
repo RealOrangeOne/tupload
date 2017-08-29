@@ -6,7 +6,7 @@ import json
 def expand_path(path):
     return os.path.abspath(os.path.expanduser(os.path.expandvars(path)))
 
-CONFIG_PATH = expand_path("/etc/.upload")
+CONFIG_PATH = expand_path("~/.upload")
 
 
 def terminate(msg):
@@ -16,7 +16,7 @@ def terminate(msg):
 
 def get_config(key, config):
     if not os.path.isfile(CONFIG_PATH):
-        raise FileNotFoundError("Couldn't find config file at {}.".format(CONFIG_PATH))
+        raise FileNotFoundError("Couldn't find config file at {}. See docs for correct location and format".format(CONFIG_PATH))
 
     with open(CONFIG_PATH) as config_file:
         data = json.load(config_file)

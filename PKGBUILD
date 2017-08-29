@@ -14,5 +14,4 @@ sha512sums=('e18fe97b985acc357b263f733cc5363f46132f56354df20a4868734df847d1cb4af
 package() {
   cd $pkgname-$pkgver
   python setup.py install --root="$pkgdir/" --optimize=1
-  install -Dm644 tupload/config.json "$pkgdir"/etc/.upload
 }
