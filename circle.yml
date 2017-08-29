@@ -13,3 +13,4 @@ test:
         - tupload --help
         - upload --help
         - screenshot --help
+        - redist --help
