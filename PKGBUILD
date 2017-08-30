@@ -1,6 +1,6 @@
 # Maintainer: Jake Howard <git+aur@theorangeone.net>
 pkgname=tupload
-pkgver=1.0.0
+pkgver=1.1.0
 pkgrel=1
 pkgdesc="Capture screenshots and upload them using rsync"
 arch=('any')

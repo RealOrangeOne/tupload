@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="tupload",
-    version="1.0.0",
+    version="1.1.0",
     install_requires=[],
     include_package_data=True,
     zip_safe=False,
